@@ -33,3 +33,32 @@ const userSignUp = async (request, response) => {
     }
 
 }
+
+const userLogin = async (request, response) => {
+    if(!request.body.email || !request.body.password){
+        return response.status(400).json({
+            message: "Bad Credentials"
+        })
+    }
+    try {
+        const userExist = await UserModel.findOne({email: request.body.email})
+        if(userExist){
+            if (request.body.password === userExist.password){
+                response.status(200).json({
+                    message: "Login successfull"
+                })
+            } else {
+                response.status(400).json({
+                    message: "Bad Credentials"})
+            }
+        } else {
+            response.status(404).json({
+                messsage: "Account not found"
+            })
+        }
+    } catch (error) {
+        response.status(500).json({
+            message: "Something went wrong"
+        })
+    }
+}
