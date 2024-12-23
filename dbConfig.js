@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 
+// MongoDB connection
 const connectDB = async (request, response) => {
     try {
         const connection = await mongoose.connect("mongodb+srv://sandhyachan:Password123@cluster0.ahjkd.mongodb.net/ElysianShores?retryWrites=true&w=majority&appName=Cluster0", { serverSelectionTimeoutMS: 30000})

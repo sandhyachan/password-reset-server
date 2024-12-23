@@ -6,9 +6,11 @@ const { connectDB } = require('./dbConfig')
 const server = express()
 connectDB()
 
+// Middleware and routes setup
 server.use(express.json())
 server.use(cors())
 
+//ROUTE HANDLERS
 server.post('/signup', userSignUp)
 
 server.post('/login', userLogin)
@@ -17,6 +19,7 @@ server.post('/resetpassword', userResetPassword)
 
 server.post('/forgotpassword', forgotPassword)
 
+//Endpoint to fetch all users
 server.get('/', async (request, response) => {
     try {
         const result = await UserModel.find()
@@ -32,6 +35,7 @@ server.get('/', async (request, response) => {
     }
 })
 
+// Start the server
 server.listen(3000, () => {
     console.log("Server is running on http://localhost:3000")
 })
